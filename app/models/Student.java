@@ -20,11 +20,10 @@ public class Student extends Model {
     @Column(name = "age")
     private int age;
 
-    public Student(String firstName, String lastName, int age, Long id) {
+    public Student(String firstName, String lastName, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -57,5 +56,15 @@ public class Student extends Model {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

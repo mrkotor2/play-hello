@@ -2,17 +2,24 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+#POST        /        controllers.StudentController.create(request: Request)
+#GET        /        controllers.StudentController.getResultList()
+#GET         /clients/{id}        controllers.StudentController.show()
+POST        /{firstName}       controllers.StudentController.create(request: Request)
+GET         /students        controllers.StudentController.show()
+#GET         /        controllers.Application.show()
+
 # Home page
-GET     /                                       Application.index
+GET         /        Application.index
 
-#Hello
-GET     /hello      controllers.HelloController.hello
-
-# Ignore favicon requests
-GET     /favicon.ico                            404
-
-# Map static resources from the /app/public folder to the /public path
-GET     /public/                                staticDir:public
-
-# Catch all
-*       /{controller}/{action}                  {controller}.{action}
+##Hello
+#GET     /hello      controllers.HelloController.hello
+#
+## Ignore favicon requests
+#GET     /favicon.ico                            404
+#
+## Map static resources from the /app/public folder to the /public path
+#GET     /public/                                staticDir:public
+#
+## Catch all
+#*       /{controller}/{action}                  {controller}.{action}
