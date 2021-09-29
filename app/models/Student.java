@@ -1,27 +1,24 @@
 package models;
 
-import lombok.Getter;
-import lombok.Setter;
+import play.data.validation.Required;
 import play.db.jpa.Model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
-//@Setter
-//@Getter
 @Entity
 public class Student extends Model {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long id;
-
     @Column(name = "first_name")
+    @Required
     private String firstName;
 
     @Column(name = "last_name")
+    @Required
     private String lastName;
 
     @Column(name = "age")
+    @Required
     private int age;
 
     public Student() {
@@ -56,14 +53,6 @@ public class Student extends Model {
     public void setAge(int age) {
         this.age = age;
     }
-
-//    public Long getId() {
-//        return id;
-//    }
-
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     @Override
     public String toString() {
