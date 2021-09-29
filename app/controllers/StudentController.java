@@ -1,27 +1,47 @@
 package controllers;
 
 import models.Student;
+import play.Logger;
 import play.db.jpa.JPA;
 import play.mvc.Controller;
-import play.mvc.Http;
-import play.mvc.Util;
 import play.mvc.results.Result;
+import views.*;
 
-import javax.inject.Inject;
-import javax.persistence.Query;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CompletionStage;
-
-import static controllers.Application.index;
 
 public class StudentController extends Controller {
 
     public static void show() {
+        Logger.error("dfdfdf");
         List<Student> students = Student.findAll();
         System.out.println(students);
         render(students);
     }
+
+    public static void create() {
+//        renderTemplate("StudentController/create.html");
+        render();
+    }
+
+    //    public static void save(String fname, String lname, Integer age) {
+    public static void save(Student student) {
+//        Student u =  new Student();
+////        u.setFirstName(); = "bob";
+//        u.save();
+//        JPA.em().flush();
+//        JPA.em().getTransaction().commit();
+//        request.params.get();
+
+        System.out.println("Starting save");
+
+//        new Student(fname, lname, age).save();
+        student.save();
+
+        System.out.println("Completing save");
+        create();
+
+    }
+
 
 //    public static void create() {
 //        Student student = new Student("CR","CRL", 21);

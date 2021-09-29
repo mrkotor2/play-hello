@@ -1,15 +1,19 @@
 package models;
 
+import lombok.Getter;
+import lombok.Setter;
 import play.db.jpa.Model;
 
 import javax.persistence.*;
 
+//@Setter
+//@Getter
 @Entity
 public class Student extends Model {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Long id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -19,6 +23,9 @@ public class Student extends Model {
 
     @Column(name = "age")
     private int age;
+
+    public Student() {
+    }
 
     public Student(String firstName, String lastName, int age) {
         this.firstName = firstName;
@@ -50,13 +57,13 @@ public class Student extends Model {
         this.age = age;
     }
 
-    public Long getId() {
-        return id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     @Override
     public String toString() {

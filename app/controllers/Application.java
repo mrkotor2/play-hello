@@ -1,17 +1,6 @@
 package controllers;
 
-import com.mysql.jdbc.Connection;
-import play.*;
-import play.db.jpa.JPA;
-import play.mvc.*;
-
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.*;
-
-import models.*;
-
-import javax.persistence.Query;
+import play.mvc.Controller;
 
 public class Application extends Controller {
 

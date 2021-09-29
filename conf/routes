@@ -5,12 +5,21 @@
 #POST        /        controllers.StudentController.create(request: Request)
 #GET        /        controllers.StudentController.getResultList()
 #GET         /clients/{id}        controllers.StudentController.show()
-POST        /{firstName}       controllers.StudentController.create(request: Request)
-GET         /students        controllers.StudentController.show()
-#GET         /        controllers.Application.show()
 
+# Import CRUD routes
+*    /admin                                              module:        crud
+
+GET        /students/create                              controllers.StudentController.create()
+
+GET        /students                                     controllers.StudentController.show()
+
+#GET        /students/:id            controllers .StudentController.show(id: Integer)
+#GET        /students/create                              controllers.StudentController.create()
+#GET         /students/save          controllers.StudentController.save()
+
+#GET         /                controllers.Application.test()
 # Home page
-GET         /        Application.index
+#GET         /        controllers.Application.index
 
 ##Hello
 #GET     /hello      controllers.HelloController.hello
@@ -22,4 +31,4 @@ GET         /        Application.index
 #GET     /public/                                staticDir:public
 #
 ## Catch all
-#*       /{controller}/{action}                  {controller}.{action}
+*       /{controller}/{action}        {controller}.{action}

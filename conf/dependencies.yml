@@ -1,8 +1,8 @@
 # Application dependencies
 
 require:
-    - play
     - play -> crud
+    - play
     - org.projectlombok -> lombok 1.18.20
     - com.fasterxml.jackson.core -> jackson-core 2.12.5
     - com.liferay -> com.fasterxml.jackson.databind 2.10.5.1.LIFERAY-PATCHED-1
