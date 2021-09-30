@@ -2,17 +2,14 @@ package controllers;
 
 import models.Student;
 import play.Logger;
-import play.db.jpa.JPA;
 import play.mvc.Controller;
-import play.mvc.results.Result;
-import views.*;
 
 import java.util.List;
 
 public class StudentController extends Controller {
 
     public static void show() {
-        Logger.error("dfdfdf");
+        Logger.error("ERROR LOG");
         List<Student> students = Student.findAll();
         System.out.println(students);
         render(students);
@@ -21,15 +18,20 @@ public class StudentController extends Controller {
     public static void create() {
         render();
     }
-    public static void edit() {
-        render();
+
+    public static void edit(Student student) {
+        System.out.println("ID " + student.getId());
+        System.out.println(student);
+        render(student);
     }
 
-//        public static void save(String fname, String lname, Integer age) {
-    public static void save(Student student) {
-//        new Student(fname, lname, age).save();
+    public static void edit(Long id, Student student) {
+        student.id = id;
+        render(student);
+    }
 
-//        request.params.get();
+    public static void save(Student student) {
+
 
         System.out.println("Starting save");
 
@@ -43,14 +45,34 @@ public class StudentController extends Controller {
     public static void change(Student student) {
 
         System.out.println("Starting change");
+        System.out.println(student);
+        ;
 
-        student.save();
-
-        System.out.println("Completing change");
-        edit();
-
+        if (student.isPersistent()) {
+            student.save();
+            System.out.println("Completing change");
+        } else {
+            System.out.println("No such student exists");
+        }
+        show();
     }
 
+    public static void delete(Student student) {
+
+        System.out.println("Starting delete");
+        System.out.println(student);
+
+        if (student.isPersistent()) {
+            student.delete();
+            System.out.println("Completing delete");
+        }
+        else {
+            System.out.println("No such student exists");
+        }
+
+        show();
+
+    }
 
 
 }

@@ -2,10 +2,6 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-#POST        /        controllers.StudentController.create(request: Request)
-#GET        /        controllers.StudentController.getResultList()
-#GET         /clients/{id}        controllers.StudentController.show()
-
 # Import CRUD routes
 *    /admin                                              module:        crud
 
@@ -13,22 +9,6 @@ GET        /students/create                              controllers.StudentCont
 
 GET        /students                                     controllers.StudentController.show()
 
-#GET        /students/:id            controllers .StudentController.show(id: Integer)
-#GET        /students/create                              controllers.StudentController.create()
-#GET         /students/save          controllers.StudentController.save()
 
-#GET         /                controllers.Application.test()
-# Home page
-#GET         /        controllers.Application.index
-
-##Hello
-#GET     /hello      controllers.HelloController.hello
-#
-## Ignore favicon requests
-#GET     /favicon.ico                            404
-#
-## Map static resources from the /app/public folder to the /public path
-#GET     /public/                                staticDir:public
-#
 ## Catch all
 *       /{controller}/{action}        {controller}.{action}
