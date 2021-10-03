@@ -1,43 +1,37 @@
-*{@import helper._}*
-
 <html xmlns:display="http://www.w3.org/1999/xhtml">
 <head>
     <title>#{get 'title' /}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-*{    <link rel="stylesheet" type="text/css" media="screen"}*
-*{          href="@{'/public/stylesheets/main.css'}"/>}*
-*{    <link rel="shortcut icon" type="image/png"}*
-*{          href="@{'/public/images/favicon.png'}"/>}*
+*{    <link rel="stylesheet" type="text/css" media="screen" href="../../../public/stylesheets/style.css">}*
+    <link rel="shortcut icon" type="image/png" href="../../../public/images/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <h1>EDIT</h1>
-${studentAsJson}
+*{${studentAsJson}}*
 
 <div id="header">
 
-    <div class="modal inmodal" id="editStudent" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content animated fadeIn">
-                <div class="modal-header">
-                    <a href="@{controllers.StudentController.show()}">Back</a>
-                    <i class="fa fa-tags modal-icon"></i>
-                    <h4 class="modal-title">Edit Student</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="editStudentForm" action="@{controllers.StudentController.change()}" method="post">
-                        <input name="student.id" value="${student.getId()}" style="display: none;">
-                        <div class="form-group  row">
+    <div id="editStudent" tabindex="-1" role="dialog" aria-hidden="true">
+        <div>
+            <a href="@{controllers.StudentController.show()}">Back</a>
+            <i class="fa fa-tags modal-icon"></i>
+            <h4 class="modal-title">Edit Student</h4>
+        </div>
+        <div >
+            <form id="editStudentForm" action="@{controllers.StudentController.change()}" method="post">
+                <input name="student.id" value="${student.getId()}" style="display: none;">
 
-                        *{                                <input name="student.id" style="display: none;">}*
-                        </div>
-
-                        <label class="col-sm-4 col-form-label">First Name</label>
-                        <div class="col-sm-8">
-                            <input name="student.firstName" value="${student.getFirstName()}" autofocus
-                                   class="form-control"
-                                   id="editNewStudentFirstName" type="text">
-                        </div>
+                <div class="form-group  row">
+                    <label class="col-sm-4 col-form-label">First Name</label>
+                    <div class="col-sm-8">
+                        <input name="student.firstName" value="${student.getFirstName()}" autofocus
+                               class="form-control"
+                               id="editNewStudentFirstName" type="text">
+                    </div>
                 </div>
+
                 <div class="form-group  row">
                     <label class="col-sm-4 col-form-label">Last Name</label>
                     <div class="col-sm-8">
@@ -53,57 +47,38 @@ ${studentAsJson}
                                id="editNewStudentAge" type="text">
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div >
                     <button type="submit" class="btn btn-primary">Edit</button>
 
                 </div>
 
 
-                </form>
+            </form>
 
-                <form id="deleteStudentForm" action="@{controllers.StudentController.delete()}" method="post">
-                    <input name="student.id" value="${student.getId()}" style="display: none;">
-                    <input name="student.firstName" value="${student.getFirstName()}" style="display: none;">
-                    <input name="student.lastName" value="${student.getLastName()}" style="display: none;">
-                    <input name="student.age" value="${student.getAge()}" style="display: none;">
+            <form id="deleteStudentForm" action="@{controllers.StudentController.delete()}" method="post">
+                <input name="student.id" value="${student.getId()}" style="display: none;">
+                <input name="student.firstName" value="${student.getFirstName()}" style="display: none;">
+                <input name="student.lastName" value="${student.getLastName()}" style="display: none;">
+                <input name="student.age" value="${student.getAge()}" style="display: none;">
 
-                    <button action="@{controllers.StudentController.delete()}" method="post" type="submit"
-                            class="btn btn-primary">Delete
-                    </button>
-                </form>
-
-            </div>
+                <button action="@{controllers.StudentController.delete()}" method="post" type="submit"
+                        class="btn btn-primary">Delete
+                </button>
+            </form>
 
         </div>
+
     </div>
-</div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
 </body>
 </html>
-
-<script>
-
-    let id = '${student.getId()}';
-    let firstName = '${student.getFirstName()}';
-    let lastName = '${student.getLastName()}';
-    let age = '${student.getAge()}';
-
-    // setStudentToEdit( id, firstName, lastName, age)
-
-
-    function setStudentToEdit(id, firstName, lastName, age) {
-
-        $("#studentId").val(id);
-
-        $("#oldStudentFirstName").val(firstName);
-        $("#oldStudentLastName").val(lastName);
-        $("#oldStudentAge").val(age);
-
-
-        // $("#editedStudentFirstName").val(firstName);
-        $("#editNewStudentFirstName").val(firstName);
-        $("#editedStudentLastName").val(lastName);
-        $("#editedStudentAge").val(age);
-
-    }
-</script>
