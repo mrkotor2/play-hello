@@ -3,12 +3,13 @@
 # ~~~~
 
 # Import CRUD routes
-*    /admin                                              module:        crud
 
 GET        /students/create                              controllers.StudentController.create()
 
 GET        /students                                     controllers.StudentController.show()
 
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
 
 ## Catch all
 *       /{controller}/{action}        {controller}.{action}
