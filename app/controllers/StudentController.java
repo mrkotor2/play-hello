@@ -1,5 +1,6 @@
 package controllers;
 
+import com.google.gson.Gson;
 import models.Student;
 import play.Logger;
 import play.mvc.Controller;
@@ -19,15 +20,19 @@ public class StudentController extends Controller {
         render();
     }
 
-    public static void edit(Student student) {
-        System.out.println("ID " + student.getId());
-        System.out.println(student);
-        render(student);
-    }
+//    public static void edit(Student student) {
+//        System.out.println("ID " + student.getId());
+//        System.out.println(student);
+//        render(student);
+//    }
 
-    public static void edit(Long id, Student student) {
-        student.id = id;
-        render(student);
+    public static void edit(Long id) {
+        Student student = Student.findById(id);
+//        new Gson().toJson(student);
+        renderArgs.put("studentAsJson", new Gson().toJson(student));
+        renderArgs.put("student", student);
+        render();
+//        renderJSON(student);//@TODO
     }
 
     public static void save(Student student) {

@@ -23,40 +23,19 @@
         <th>Age</th>
         <th>Option</th>
     </tr>
+
+#{list items:students, as:'student'}
+    <tr>
+        <td>${student.getFirstName()}</td>
+        <td>${student.getLastName()}</td>
+        <td>${student.getAge()}</td>
+        <td><a href="@{controllers.StudentController.edit(student.id)}">Edit</a></td>
+    </tr>
+#{/list}
 </table>
-
-<script>
-
-    let table = document.getElementById("studentsTable");
-
-    #{list items:students, as:'student'}
-    {
-        let row = table.insertRow(1);
-
-        let cell1 = row.insertCell(0);
-        let cell2 = row.insertCell(1);
-        let cell3 = row.insertCell(2);
-        let cell4 = row.insertCell(3);
-        // let cell5 = row.insertCell(4);
-
-        cell1.innerHTML = "${student.getFirstName()}";
-        cell2.innerHTML = "${student.getLastName()}";
-        cell3.innerHTML = "${student.getAge()}";
-    *{cell4.innerHTML = '<button id="' + ${student.getId()} +'" class="btn btn-primary btn-outline btn-xs" data-placement="top" data-toggle="modal" type="button" ' +}*
-    *{        'onclick="setStudentToEdit(\'' + ${student.getId()} +'\', \'" + ${student.getFirstName()} +"\', \'" + ${student.getLastName()} +"\', \'' + ${student.getAge()} +'\')"><i class="fa fa-gear"></i></button>';}*
-
-        cell4.innerHTML = '<a href="@{controllers.StudentController.edit(student.getId(), student)}">Edit</a>'
-    *{cell5.innerHTML = "${student.getId()}";}*
-    }
-
-    #{/list}
-
-</script>
 
 <a href="@{controllers.StudentController.create()}">Create new student</a>
 #{get 'moreScripts' /}
 
-#{if }#{/if}
-*{@TODO}*
 </body>
 </html>
