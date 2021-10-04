@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.Min;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
@@ -10,15 +11,16 @@ import javax.persistence.Entity;
 public class Student extends Model {
 
     @Column(name = "first_name")
-    @Required
+    @Required(message = "First name required")
     private String firstName;
 
     @Column(name = "last_name")
-    @Required
+    @Required(message = "Last name required")
     private String lastName;
 
     @Column(name = "age")
-    @Required
+    @Required(message = "Age required")
+    @Min(value = 15, message = "Should be more than 15")
     private int age;
 
     public Student() {

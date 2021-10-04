@@ -3,8 +3,7 @@
     <title>#{get 'title' /}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="shortcut icon" type="image/png" href="../../../public/images/favicon.png">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="all" href="/public/css/style.css">
 </head>
 <body>
@@ -21,12 +20,13 @@
         </div>
         <div>
             <form id="editStudentForm" action="@{controllers.StudentController.change()}" method="post">
-                <input name="student.id" value="${student.getId()}" style="display: none;">
-
+            #{if student}
+                <input name="student.id" value="${student?.id}" style="display: none;">
+            #{/if}
                 <div class="form-group  row">
                     <label class="col-sm-4 col-form-label">First Name</label>
                     <div class="col-sm-8">
-                        <input name="student.firstName" value="${student.getFirstName()}" autofocus
+                        <input name="student.firstName" value="${student?.getFirstName()}" autofocus
                                class="form-control"
                                id="editNewStudentFirstName" type="text">
                     </div>
@@ -35,7 +35,7 @@
                 <div class="form-group  row">
                     <label class="col-sm-4 col-form-label">Last Name</label>
                     <div class="col-sm-8">
-                        <input name="student.lastName" value="${student.getLastName()}" class="form-control"
+                        <input name="student.lastName" value="${student?.getLastName()}" class="form-control"
                                id="editNewStudentLastName"
                                type="text">
                     </div>
@@ -43,7 +43,7 @@
                 <div class="form-group  row">
                     <label class="col-sm-4 col-form-label">Age</label>
                     <div class="col-sm-8">
-                        <input name="student.age" value="${student.getAge()}" class="form-control"
+                        <input name="student.age" value="${student?.getAge()}" class="form-control"
                                id="editNewStudentAge" type="text">
                     </div>
                 </div>
@@ -57,10 +57,12 @@
 
             <form id="deleteStudentForm" action="@{controllers.StudentController.delete()}" method="post">
                 <input name="student.id" value="${student.getId()}" style="display: none;">
-
+            #{if student}
                 <button type="submit"
                         class="btn btn-primary">Delete
                 </button>
+            #{/if}
+
             </form>
 
         </div>
@@ -76,6 +78,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-
+</div>
 </body>
 </html>

@@ -1,59 +1,73 @@
-*{@import helper._}*
-
+#{ifErrors}
+<h1>Oops…</h1>
+    #{errors}
+    <li>${error}</li>
+    #{/errors}
+#{/ifErrors}
 <html>
 <head>
     <title>#{get 'title' /}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="all" href="/public/css/style.css">
 </head>
 <body>
-<h1>CREATE</h1>
-
-<div id="header">
-    <div id="addStudent" tabindex="-1" role="dialog" aria-hidden="true">
-        <div>
+<div class="container">
+#{if student}<h1>EDIT</h1>#{/if}
+#{else } <h1>CREATE</h1>#{/else}
+    <div id="header">
+        <div id="addStudent" tabindex="-1" role="dialog" aria-hidden="true">
             <div>
                 <div>
-                    <a href="@{controllers.StudentController.show()}">Back</a>
-                    <i class="fa fa-tags modal-icon"></i>
-                    <h4 class="modal-title">Add Student</h4>
-                </div>
-                <div>
-                    <form id="addStudentForm" action="@{controllers.StudentController.save()}" method="post">
-                        <div class="form-group  row">
-                            <label class="col-sm-4 col-form-label">First Name</label>
-                            <div class="col-sm-8">
-                                <input name="student.firstName" autofocus class="form-control"
-                                       id="addNewStudentFirstName" type="text">
+                    <div>
+                        <a href="@{controllers.StudentController.show()}">Back</a>
+                        <i class="fa fa-tags modal-icon"></i>
+                    #{if student}<h4 class="modal-title">Edit Student</h4>#{/if}
+                    #{else } <h4 class="modal-title">Add Student</h4>#{/else}
+                    </div>
+                    <div>
+                        <form id="addStudentForm" action="@{controllers.StudentController.save()}" method="post">
+                        #{if student}
+                            <input name="student.id" value="${student?.id}" style="display: none;">
+                        #{/if}
+                            <div class="form-group  row">
+                                <label class="col-sm-4 col-form-label">First Name</label>
+                                <div class="col-sm-8">
+                                    <label>First Name</label>
+                                    <input name="student.firstName" value="${student?.getFirstName()}"
+                                           class="form-control"
+                                           id="addNewStudentFirstName" type="text" placeholder="First name">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group  row">
-                            <label class="col-sm-4 col-form-label">Last Name</label>
-                            <div class="col-sm-8">
-                                <input name="student.lastName" class="form-control" id="addNewStudentLastName"
-                                       type="text">
+                            <div class="form-group  row">
+                                <label class="col-sm-4 col-form-label">Last Name</label>
+                                <div class="col-sm-8">
+                                    <input name="student.lastName" value="${student?.getLastName()}"
+                                           class="form-control" id="addNewStudentLastName"
+                                           type="text" placeholder="Last name">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group  row">
-                            <label class="col-sm-4 col-form-label">Age</label>
-                            <div class="col-sm-8">
-                                <input name="student.age" class="form-control" id="addNewStudentAge" type="text">
+                            <div class="form-group  row">
+                                <label class="col-sm-4 col-form-label">Age</label>
+                                <div class="col-sm-8">
+                                    <input name="student.age" value="${student?.getAge()}" class="form-control"
+                                           id="addNewStudentAge" type="text"
+                                           placeholder="age">
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
-                </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
 
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
