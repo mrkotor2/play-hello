@@ -1,7 +1,6 @@
 # Application dependencies
 
 require:
-    - play -> crud
     - play
     - org.projectlombok -> lombok 1.18.20
     - com.fasterxml.jackson.core -> jackson-core 2.12.5

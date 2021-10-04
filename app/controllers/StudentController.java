@@ -10,9 +10,10 @@ import java.util.List;
 public class StudentController extends Controller {
 
     public static void show() {
-        Logger.error("ERROR LOG");
+
+//        Logger.error("ERROR LOG");
         List<Student> students = Student.findAll();
-        System.out.println(students);
+        Logger.info("Students: " + students);
         render(students);
     }
 
@@ -20,14 +21,22 @@ public class StudentController extends Controller {
         render();
     }
 
-//    public static void edit(Student student) {
-//        System.out.println("ID " + student.getId());
-//        System.out.println(student);
-//        render(student);
-//    }
+    public static void save(Student student) {
+
+        Logger.info("Starting save");
+
+        student.save();
+        Logger.info("Completing save");
+        Logger.info(" " + student);
+
+        create();
+    }
 
     public static void edit(Long id) {
+
         Student student = Student.findById(id);
+
+        Logger.info("EDIT STUDENT " + student);
 //        new Gson().toJson(student);
         renderArgs.put("studentAsJson", new Gson().toJson(student));
         renderArgs.put("student", student);
@@ -35,48 +44,32 @@ public class StudentController extends Controller {
 //        renderJSON(student);//@TODO
     }
 
-    public static void save(Student student) {
-
-
-        System.out.println("Starting save");
-
-        student.save();
-
-        System.out.println("Completing save");
-        create();
-
-    }
-
     public static void change(Student student) {
 
-        System.out.println("Starting change");
-        System.out.println(student);
-        ;
+        Logger.info("Starting change");
+        Logger.info("" + student);
 
         if (student.isPersistent()) {
             student.save();
-            System.out.println("Completing change");
+            Logger.info("Completing change");
         } else {
-            System.out.println("No such student exists");
+            Logger.info("No such student exists");
         }
         show();
     }
 
     public static void delete(Student student) {
 
-        System.out.println("Starting delete");
-        System.out.println(student);
+        Logger.info("Starting delete");
+        Logger.info("" + student);
 
         if (student.isPersistent()) {
             student.delete();
-            System.out.println("Completing delete");
+            Logger.info("Completing delete");
+        } else {
+            Logger.info("No such student exists");
         }
-        else {
-            System.out.println("No such student exists");
-        }
-
         show();
-
     }
 
 

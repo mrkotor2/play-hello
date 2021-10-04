@@ -19,7 +19,7 @@
             <i class="fa fa-tags modal-icon"></i>
             <h4 class="modal-title">Edit Student</h4>
         </div>
-        <div >
+        <div>
             <form id="editStudentForm" action="@{controllers.StudentController.change()}" method="post">
                 <input name="student.id" value="${student.getId()}" style="display: none;">
 
@@ -47,7 +47,7 @@
                                id="editNewStudentAge" type="text">
                     </div>
                 </div>
-                <div >
+                <div>
                     <button type="submit" class="btn btn-primary">Edit</button>
 
                 </div>
@@ -57,11 +57,8 @@
 
             <form id="deleteStudentForm" action="@{controllers.StudentController.delete()}" method="post">
                 <input name="student.id" value="${student.getId()}" style="display: none;">
-                <input name="student.firstName" value="${student.getFirstName()}" style="display: none;">
-                <input name="student.lastName" value="${student.getLastName()}" style="display: none;">
-                <input name="student.age" value="${student.getAge()}" style="display: none;">
 
-                <button action="@{controllers.StudentController.delete()}" method="post" type="submit"
+                <button type="submit"
                         class="btn btn-primary">Delete
                 </button>
             </form>
