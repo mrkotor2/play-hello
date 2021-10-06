@@ -1,6 +1,5 @@
 package controllers;
 
-import com.google.gson.Gson;
 import models.Student;
 import play.Logger;
 import play.data.validation.Error;
@@ -24,18 +23,26 @@ public class StudentController extends Controller {
 
     }
 
-    public static void create() {
+    public static void edit() {
         try {
             render();
         } catch (Exception e) {
-            Logger.error("Error occurred during create page initialization, caused by: " + e);
+            Logger.error("Error occurred during edit page initialization, caused by: " + e);
         }
     }
 
     public static void edit(Long id) {
         try {
-            Student student = Student.findById(id);
-            Logger.info("EDIT STUDENT " + student);
+            Student student = null;
+
+            if (id == null) {
+                Logger.info("Add new student");
+            } else {
+                student = Student.findById(id);
+                Logger.info("EDIT STUDENT " + student);
+
+            }
+//            Student student = Student.findById(id);
 
 //            renderArgs.put("studentAsJson", new Gson().toJson(student));
 
@@ -71,10 +78,8 @@ public class StudentController extends Controller {
             Logger.info("Completing save");
             Logger.info(" " + student);
         }
-        create();
+        edit();
     }
-
-
 
     public static void change(Student student) {
 

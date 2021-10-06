@@ -40,9 +40,11 @@
                     </div>
                 #{if student }
                 <form id="addStudentForm" class="ajax" action="@{controllers.StudentController.change()}"
-                      method="post">#{/if}
+                      method="post">
+                #{/if}
+
                 #{else }
-                <form id="addStudentForm" class="ajax" action="@{controllers.StudentController.create()}"
+                <form id="addStudentForm" class="ajax" action="@{controllers.StudentController.save()}"
                       method="post">
                 #{/else}
 
