@@ -32,6 +32,24 @@ public class StudentController extends Controller {
         }
     }
 
+    public static void edit(Long id) {
+        try {
+            Student student = Student.findById(id);
+            Logger.info("EDIT STUDENT " + student);
+
+//            renderArgs.put("studentAsJson", new Gson().toJson(student));
+
+            renderArgs.put("student", student);
+            render();
+        } catch (Exception e) {
+            Logger.error("Error occurred during student editOld page init, caused by: " + e);
+        }
+
+//        new Gson().toJson(student);
+
+//        renderJSON(student);//@TODO
+    }
+
     public static void save(@Valid Student student) {
         Logger.info("Starting save");
 
@@ -40,12 +58,13 @@ public class StudentController extends Controller {
                 Logger.error(error.message());
             }
             params.flash(); // add http parameters to the flash scope
-            flash.put("some", student);
+//            flash.put("some", student);
             Validation.keep(); // keep the errors for the next request
 
         } else {
             try {
                 student.save();
+                flash.put("CREATED", student);
             } catch (Exception e) {
                 Logger.error("Error occurred during student save, caused by: " + e);
             }
@@ -55,21 +74,7 @@ public class StudentController extends Controller {
         create();
     }
 
-    public static void edit(Long id) {
-        try {
-            Student student = Student.findById(id);
-            Logger.info("EDIT STUDENT " + student);
-            renderArgs.put("studentAsJson", new Gson().toJson(student));
-            renderArgs.put("student", student);
-            render();
-        } catch (Exception e) {
-            Logger.error("Error occurred during student edit page init, caused by: " + e);
-        }
 
-//        new Gson().toJson(student);
-
-//        renderJSON(student);//@TODO
-    }
 
     public static void change(Student student) {
 
