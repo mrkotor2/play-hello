@@ -1,0 +1,36 @@
+#{extends 'navBar.html' /}
+
+<div class="container-fluid">
+    <h1>SUBJECTS</h1>
+    <table id="subjectsTable">
+        <tr>
+            <th>Name</th>
+            <th>Option</th>
+        </tr>
+
+    #{list items:subjects, as:'subject'}
+        <tr>
+            <td>${subject.getName()}</td>
+            <td>
+                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="editForm(${subject.id})">
+                    Edit
+                </button>
+            </td>
+
+        </tr>
+    #{/list}
+    </table>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" onclick="editForm(null)">
+        CREATE new Subject
+    </button>
+
+</div>
+
+<script>
+    function editForm(id) {
+        $('#mainModal').modal({
+            remote: "@{controllers.SubjectController.edit()}?id=" + id
+        });
+    }
+</script>

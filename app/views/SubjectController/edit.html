@@ -1,0 +1,56 @@
+#{extends 'modal.html'/}
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="mainModalLabel">Edit subject</h4>
+    </div>
+    <div class="modal-body">
+
+    #{if subject }
+    <div id="editSubjectForm" class="ajax" action="@{controllers.SubjectController.change()}"
+         method="post">
+    #{/if}
+    #{else }
+    <form id="addSubjectForm" class="ajax" action="@{controllers.SubjectController.save()}"
+          method="post">
+    #{/else}
+
+    #{if subject }
+        <input name="subject.id" value="${subject?.id}" style="display: none;">
+    #{/if}
+        <div class="form-group  row">
+            <label class="col-sm-4 col-form-label">Name</label>
+            <div class="col-sm-8">
+                <input name="subject.name" value="${subject?.getName()}"
+                       class="form-control" id="addNewSubjectName"
+                       type="text" placeholder="Name">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+        #{if subject}
+            <button type="submit" class="btn btn-primary">Edit</button>
+        #{/if}
+        #{else }
+            <button type="submit" class="btn btn-primary">Save</button>
+        #{/else}
+    </form>
+    #{if subject}
+        <form id="deleteStudentForm" action="@{controllers.SubjectController.delete()}" method="post">
+            <input name="subject.id" value="${subject.id}" style="display: none;">
+            <button type="submit"
+                    class="btn btn-primary">Delete
+            </button>
+        </form>
+
+    #{/if}
+    </div>
+    </div>
+</div>
+
+</div>
+</div>

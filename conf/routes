@@ -4,10 +4,13 @@
 
 # Import CRUD routes
 
-GET        /students/create                              controllers.StudentController.create()
+#GET        /students/create                              controllers.StudentController.create()
 
 GET        /students                                     controllers.StudentController.show()
+GET        /students/edit                                     controllers.StudentController.edit()
+GET        /students/edit/{id}                                controllers.StudentController.edit(Long id)
 
+GET        /subjects                                     controllers.SubjectController.show()
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 

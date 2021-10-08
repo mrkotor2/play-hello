@@ -1,17 +1,47 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <title>#{get 'title' /}</title>
-    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/main.css'}" />
-</head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="all" href="/public/css/style.css">
+
+    <meta charset="${_response_encoding}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- jQuery library -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
 <body>
+
 <div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a href="#news">News</a>
+    <a class="active" href="@{controllers.StudentController.show()}">Students</a>
+    <a href="@{controllers.SubjectController.show()}">Subjects</a>
     <a href="#contact">Contact</a>
     <a href="#about">About</a>
 </div>
+
+<div class="modal fade " id="mainModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function () {
+        $(this).removeData('bs.modal');
+    });
+    $('#mainModal').on('shown.bs.modal', function () {
+        $('#mainModal').focus()
+    })
+</script>
 <h1>#{get 'title' /}</h1>
 #{doLayout /}
-<div class="footer">Built with the play! framework</div>
+
+<div class="footer">
+    <p></p>
+    Built with the play! framework
+</div>
+
 </body>
 </html>
