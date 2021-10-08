@@ -4,8 +4,8 @@ import play.data.validation.Min;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Student extends Model {
@@ -22,6 +22,14 @@ public class Student extends Model {
     @Required(message = "Age required")
     @Min(value = 15, message = "Should be more than 15")
     private int age;
+
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "membership")
+//    public List<Subject> subjects;
+
+    // inverse side of the relation
+    @ManyToMany(mappedBy = "students")
+    public List<Subject> subjects;
 
     public Student() {
     }

@@ -3,8 +3,8 @@ package models;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Subject extends Model {
@@ -13,7 +13,14 @@ public class Subject extends Model {
     @Required(message = "First name required")
     private String name;
 
-    public Subject(){
+    //    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "membership")
+//    public List<Student> students;
+// owning side
+    @ManyToMany
+    public List<Student> students;
+
+    public Subject() {
 
     }
 

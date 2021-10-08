@@ -6,6 +6,7 @@
         <tr>
             <th>Name</th>
             <th>Option</th>
+            <th>Membership</th>
         </tr>
 
     #{list items:subjects, as:'subject'}
@@ -14,6 +15,11 @@
             <td>
                 <button type="button" class="btn btn-primary" data-toggle="modal" onclick="editForm(${subject.id})">
                     Edit
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="membershipForm(${subject.id})">
+                    Membership
                 </button>
             </td>
 
@@ -31,6 +37,12 @@
     function editForm(id) {
         $('#mainModal').modal({
             remote: "@{controllers.SubjectController.edit()}?id=" + id
+        });
+    }
+
+    function membershipForm(id) {
+        $('#mainModal').modal({
+            remote: "@{controllers.SubjectController.membership()}?id=" + id
         });
     }
 </script>

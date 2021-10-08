@@ -1,10 +1,8 @@
 package controllers;
 
+import models.Student;
 import models.Subject;
 import play.Logger;
-import play.data.validation.Error;
-import play.data.validation.Valid;
-import play.data.validation.Validation;
 import play.mvc.Controller;
 
 import java.util.List;
@@ -46,14 +44,14 @@ public class SubjectController extends Controller {
     public static void save(Subject subject) {
         Logger.info("Starting save");
 
-            try {
-                subject.save();
-                flash.put("CREATED", subject);
-            } catch (Exception e) {
-                Logger.error("Error occurred during subject save, caused by: " + e);
-            }
-            Logger.info("Completing save");
-            Logger.info(" " + subject);
+        try {
+            subject.save();
+            flash.put("CREATED", subject);
+        } catch (Exception e) {
+            Logger.error("Error occurred during subject save, caused by: " + e);
+        }
+        Logger.info("Completing save");
+        Logger.info(" " + subject);
         show();
     }
 
@@ -93,4 +91,38 @@ public class SubjectController extends Controller {
 
         show();
     }
+
+    public static void membership(Long id) {
+        Logger.info("GOING TO MEMBERSHIP");
+
+        try {
+            Subject subject = Subject.findById(id);
+            List<Student> studentsOfSubject = subject.students;
+
+            renderArgs.put("studentsOfSubject", studentsOfSubject);
+            render();
+        } catch (Exception e) {
+            Logger.error("Error occurred during membership init, caused by: " + e);
+        }
+
+    }
+
+    public static void AddMembership(Long id) {
+        Logger.info("GOING TO Add member");
+
+        try {
+            Subject subject = Subject.findById(id);
+            List<Student> studentsOfSubject = subject.students;
+
+            Student student = Student.findById(2); //TODO remove hardcode
+            studentsOfSubject.add(student);
+
+            renderArgs.put("studentsOfSubject", studentsOfSubject);
+            render();
+        } catch (Exception e) {
+            Logger.error("Error occurred during membership init, caused by: " + e);
+        }
+
+    }
+
 }

@@ -23,13 +23,13 @@ public class StudentController extends Controller {
 
     }
 
-    public static void edit() {
-        try {
-            render();
-        } catch (Exception e) {
-            Logger.error("Error occurred during edit page initialization, caused by: " + e);
-        }
-    }
+//    public static void edit() {
+//        try {
+//            render();
+//        } catch (Exception e) {
+//            Logger.error("Error occurred during edit page initialization, caused by: " + e);
+//        }
+//    }
 
     public static void edit(Long id) {
         try {
@@ -78,7 +78,7 @@ public class StudentController extends Controller {
             Logger.info("Completing save");
             Logger.info(" " + student);
         }
-        edit();
+        edit(null);
     }
 
     public static void change(Student student) {

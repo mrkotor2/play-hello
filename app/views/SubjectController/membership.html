@@ -1,0 +1,25 @@
+#{extends 'modal.html'/}
+
+<div class="modal-content">
+    <h1>MEMBERSHIP</h1>
+
+    <input name="subject.id" value="${subject?.id}" style="display: none;">
+
+    <table id="membersTable">
+        <tr>
+            <th>Name</th>
+            <th>Option</th>
+            <th>Membership</th>
+        </tr>
+
+    #{list items:studentsOfSubject, as: 'studentMember'}
+        <tr>
+            <td>${studentMember.getFirstName()}</td>
+            <td>${studentMember.getLastName()}</td>
+            <td>${studentMember.getAge()}</td>
+        </tr>
+    #{/list}
+
+    </table>
+
+</div>

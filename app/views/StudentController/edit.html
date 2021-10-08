@@ -1,3 +1,4 @@
+#{extends 'navBar.html'/}}
 
 #{ifErrors}
 <div class="alert alert-danger" role="alert">
@@ -15,15 +16,15 @@
 </div>
 #{/if}
 
-<html>
-<head>
-    <title>#{get 'title' /}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="all" href="/public/css/style.css">
-</head>
-<body>
+*{<html>}*
+*{<head>}*
+*{    <title>#{get 'title' /}</title>}*
+*{    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>}*
+*{    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"}*
+*{          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">}*
+*{    <link rel="stylesheet" type="text/css" media="all" href="/public/css/style.css">}*
+*{</head>}*
+*{<body>}*
 
 <div class="container">
 #{if student}<h1>EDIT</h1>#{/if}
@@ -137,5 +138,5 @@
 *{        });}*
 *{    });}*
 *{</script>}*
-</body>
-</html>
+*{</body>}*
+*{</html>}*
