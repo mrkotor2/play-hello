@@ -7,9 +7,9 @@
 
     <table id="membersTable">
         <tr>
-            <th>Name</th>
-            <th>Option</th>
-            <th>Membership</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
         </tr>
 
     #{list items:studentsOfSubject, as: 'studentMember'}
@@ -21,5 +21,9 @@
     #{/list}
 
     </table>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
 
 </div>

@@ -1,0 +1,26 @@
+#{extends 'modal.html'/}
+
+<div class="modal-content">
+
+    <h1>MEMBERSHIP</h1>
+
+    <input name="student.id" value="${student?.id}" style="display: none;">
+
+    <table id="membersTable">
+        <tr>
+            <th>Subject</th>
+        </tr>
+
+    #{list items:subjectsOfStudent, as: 'subjectMember'}
+        <tr>
+            <td>${subjectMember.getName()}</td>
+        </tr>
+    #{/list}
+
+    </table>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+
+</div>

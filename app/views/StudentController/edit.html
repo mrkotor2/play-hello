@@ -16,16 +16,6 @@
 </div>
 #{/if}
 
-*{<html>}*
-*{<head>}*
-*{    <title>#{get 'title' /}</title>}*
-*{    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>}*
-*{    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"}*
-*{          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">}*
-*{    <link rel="stylesheet" type="text/css" media="all" href="/public/css/style.css">}*
-*{</head>}*
-*{<body>}*
-
 <div class="container">
 #{if student}<h1>EDIT</h1>#{/if}
 #{else } <h1>CREATE</h1>#{/else}
@@ -108,35 +98,3 @@
 </div>
 </div>
 </div>
-
-
-
-*{<script>}*
-
-*{    $('form').on('submit', function (event) {}*
-*{        var $form = $(this);}*
-
-*{        event.preventDefault();}*
-*{        $('.js-alert').addClass('hidden');}*
-*{        $('.js-btn').button('loading');}*
-
-*{        $.ajax({}*
-*{            url: '@{controllers.StudentController.save()}',}*
-*{            type: 'POST',}*
-*{            data: $form.serialize(),}*
-*{            success: function (response) {}*
-*{                $('.js-alert').removeClass('hidden');}*
-*{                $('.js-btn').button('reset');}*
-*{                // console.log("suc", response);}*
-*{                console.log("suc", ${student});}*
-*{                // $('#dialogDiv').html(response);}*
-*{            },}*
-*{            error: function () {}*
-*{                alert('Error');}*
-*{                console.log("err");}*
-*{            }}*
-*{        });}*
-*{    });}*
-*{</script>}*
-*{</body>}*
-*{</html>}*

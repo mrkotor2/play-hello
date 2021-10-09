@@ -11,6 +11,8 @@
         <th>Last name</th>
         <th>Age</th>
         <th>Option</th>
+        <th>Membership</th>
+        <th>Add membership</th>
     </tr>
 
 #{list items:students, as:'student'}
@@ -19,9 +21,35 @@
         <td>${student.getLastName()}</td>
         <td>${student.getAge()}</td>
         <td><a href="@{controllers.StudentController.edit(student.id)}">Edit</a></td>
+        <td>
+            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="membershipForm(${student.id})">
+                Membership
+            </button>
+        </td>
+        <td>
+            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="addMembershipForm(${student.id})">
+                Add Subject
+            </button>
+        </td>
     </tr>
 #{/list}
 </table>
 
 <a href="@{controllers.StudentController.edit(0)}">Create new student</a>
 
+<script>
+
+    function membershipForm(id) {
+        *{console.log("@{controllers.StudentController.membership()}?id=" + id);}*
+
+        $('#mainModal').modal({
+            remote: "@{controllers.StudentController.membership()}?id=" + id
+        });
+    }
+
+    function addMembershipForm(id) {
+        $('#mainModal').modal({
+            remote: "@{controllers.StudentController.addMembershipCheckSubjects()}?id=" + id
+        });
+    }
+</script>

@@ -1,12 +1,14 @@
 package controllers;
 
 import models.Student;
+import models.Subject;
 import play.Logger;
 import play.data.validation.Error;
 import play.data.validation.Valid;
 import play.data.validation.Validation;
 import play.mvc.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentController extends Controller {
@@ -22,14 +24,6 @@ public class StudentController extends Controller {
         }
 
     }
-
-//    public static void edit() {
-//        try {
-//            render();
-//        } catch (Exception e) {
-//            Logger.error("Error occurred during edit page initialization, caused by: " + e);
-//        }
-//    }
 
     public static void edit(Long id) {
         try {
@@ -118,5 +112,97 @@ public class StudentController extends Controller {
         show();
     }
 
+    public static void membership(Long id) {
+
+        Logger.info("GOING TO MEMBERSHIP");
+
+        try {
+            Student student = Student.findById(id);
+
+            List<Subject> subjectsOfStudent = student.subjects;
+
+            renderArgs.put("student", student);
+            renderArgs.put("subjectsOfStudent", subjectsOfStudent);
+            render();
+        } catch (Exception e) {
+            Logger.error("Error occurred during membership init, caused by: " + e);
+        }
+
+    }
+
+    public static void addMembershipCheckSubjects(Long id) {
+
+        Logger.info("GOING TO Add membership form init");
+
+        try {
+            List<Subject> subjects = Subject.findAll();
+            Logger.info("LIST OF ALL SUBS: " + subjects);
+
+            Student student = Student.findById(id);
+            Logger.info("STUDENT: " + student);
+
+            List<Subject> subjectsOfStudent = student.subjects;
+            Logger.info("LIST OF SUBJECTS OF STUDENT: " + subjectsOfStudent);
+
+            List<Subject> subjectsExcept = new ArrayList<Subject>();
+
+            for (Subject subject : subjects) {
+                boolean contains = false;
+
+                for (Subject subjectOfStudent : subjectsOfStudent) {
+                    if (subjectOfStudent.getId().equals(subject.getId())) {
+                        Logger.info("Found it: " + subject.getId());
+                        contains = true;
+                        break;
+                    }
+                }
+                if (!contains) {
+                    subjectsExcept.add(subject);
+                }
+            }
+
+            Logger.info("LIST OF EXCEPTS: " + subjectsExcept);
+
+            if (subjectsOfStudent.size() <= 0) {
+                renderArgs.put("subjectsExcept", subjects);
+            } else {
+                renderArgs.put("subjectsExcept", subjectsExcept);
+            }
+
+            renderArgs.put("student", student);
+            render();
+
+        } catch (Exception e) {
+            Logger.error("Error occurred during add membership form init, caused by: " + e);
+        }
+
+    }
+
+    public static void addMembership(Long subjectId, Long studentId) {
+
+        Logger.info("GOING TO Add membership");
+
+        try {
+
+            Subject subject = Subject.findById(subjectId);
+
+            Student student = Student.findById(studentId);
+
+            List<Student> students = subject.students;
+
+            if (!students.contains(student)){
+                students.add(student);
+            }
+            else {
+                Logger.info("THIS STUDENT ALREADY HERE");
+                throw new RuntimeException("someException");
+            }
+
+            addMembershipCheckSubjects(studentId);
+        }
+        catch (Exception e) {
+            Logger.error("Error occurred during add membership, caused by: " + e);
+        }
+    }
 
 }
