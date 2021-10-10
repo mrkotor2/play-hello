@@ -9,12 +9,27 @@
     <table id="membersTable">
         <tr>
             <th>Subject</th>
+            <th>Action</th>
         </tr>
 
     #{list items:subjectsOfStudent, as: 'subjectMember'}
         <tr>
             <td>${subjectMember.getName()}</td>
+            <td>
+                <form id="addMem" action="@{controllers.StudentController.removeMembership()}" method="post">
+                *{        <input name="student.id" value="${student.getId()}" style="display: none;">}*
+                    <input name="subjectId" value="${subjectMember?.id}" style="display: none;">
+                    <input name="studentId" value="${student?.id}" style="display: none;">
+
+                    <button type="submit"
+                            class="btn btn-primary">Remove Sub
+                    </button>
+
+                </form>
+            </td>
         </tr>
+
+
     #{/list}
 
     </table>

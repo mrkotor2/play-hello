@@ -18,10 +18,16 @@
         <tr>
             <td>${subjectMember.getName()}</td>
             <td>
-                <button type="button" class="btn btn-primary" data-toggle="modal"
-                        onclick="addMembership(${subjectMember?.id}, ${student?.id})">
-                    Membership
-                </button>
+                <form id="addMem" action="@{controllers.StudentController.addMembership()}" method="post">
+                *{        <input name="student.id" value="${student.getId()}" style="display: none;">}*
+                    <input name="subjectId" value="${subjectMember?.id}" style="display: none;">
+                    <input name="studentId" value="${student?.id}" style="display: none;">
+
+                    <button type="submit"
+                            class="btn btn-primary">Add Sub
+                    </button>
+
+                </form>
             </td>
         </tr>
 
@@ -36,14 +42,3 @@
 
 </div>
 
-<script>
-    function addMembership(subjectId, studentId) {
-
-        console.log(subjectId, studentId);
-        *{console.log("@{controllers.StudentController.addMembership()}?subjectId=" + subjectId + "&" + "?studentId=" + studentId);}*
-
-        $('#mainModal').modal({
-            remote: "@{controllers.StudentController.addMembership()}?subjectId=" + subjectId + "&" + "?studentId=" + studentId
-        });
-    }
-</script>

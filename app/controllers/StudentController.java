@@ -132,7 +132,7 @@ public class StudentController extends Controller {
 
     public static void addMembershipCheckSubjects(Long id) {
 
-        Logger.info("GOING TO Add membership form init");
+        Logger.info("GOING TO init Add membership form");
 
         try {
             List<Subject> subjects = Subject.findAll();
@@ -181,28 +181,61 @@ public class StudentController extends Controller {
     public static void addMembership(Long subjectId, Long studentId) {
 
         Logger.info("GOING TO Add membership");
+        Logger.info("SUB " + subjectId);
+        Logger.info("STUD " + studentId);
 
         try {
+            Subject subject = Subject.findById(subjectId);
 
+            Student student = Student.findById(studentId);
+
+            List<Student> students = subject.students;
+            Logger.info("LIST OF STUDENTS OF SUBJECT OLD: " + students);
+
+            if (!students.contains(student)) {
+                students.add(student);
+                Logger.info("LIST OF STUDENTS OF SUBJECT NOW: " + students);
+                subject.save();
+
+                Logger.info("ADDED SUB FOR STUDENT");
+
+            } else {
+                Logger.info("THIS STUDENT ALREADY HERE");
+                throw new RuntimeException("someException");
+            }
+
+            show();
+        } catch (Exception e) {
+            Logger.error("Error occurred during add membership, caused by: " + e);
+        }
+    }
+
+
+    public static void removeMembership(Long subjectId, Long studentId) {
+
+        Logger.info("GOING TO REMOVE membership");
+
+        try {
             Subject subject = Subject.findById(subjectId);
 
             Student student = Student.findById(studentId);
 
             List<Student> students = subject.students;
 
-            if (!students.contains(student)){
-                students.add(student);
-            }
-            else {
-                Logger.info("THIS STUDENT ALREADY HERE");
+            if (students.contains(student)) {
+                students.remove(student);
+                subject.save();
+                Logger.info("Student has been unsubscribed");
+            } else {
+                Logger.info("THIS STUDENT DOESNT HAVE THIS SUBJECT");
                 throw new RuntimeException("someException");
             }
 
-            addMembershipCheckSubjects(studentId);
-        }
-        catch (Exception e) {
+            show();
+        } catch (Exception e) {
             Logger.error("Error occurred during add membership, caused by: " + e);
         }
     }
+
 
 }

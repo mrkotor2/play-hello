@@ -4,6 +4,7 @@ import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,12 @@ public class Subject extends Model {
 //    public List<Student> students;
 // owning side
     @ManyToMany
-    public List<Student> students;
+    @JoinTable(
+            name = "subject_student",
+            joinColumns = @JoinColumn(name = "subject_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    public List<Student> students = new ArrayList<>();
 
     public Subject() {
 
