@@ -18,7 +18,7 @@ public class Subject extends Model {
 //    @JoinTable(name = "membership")
 //    public List<Student> students;
 // owning side
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "subject_student",
             joinColumns = @JoinColumn(name = "subject_id"),

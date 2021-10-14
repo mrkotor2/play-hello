@@ -10,7 +10,7 @@
     <div class="modal-body">
 
     #{if subject }
-    <div id="editSubjectForm" class="ajax" action="@{controllers.SubjectController.change()}"
+    <form id="editSubjectForm" class="ajax" action="@{controllers.SubjectController.change()}"
          method="post">
     #{/if}
     #{else }
@@ -48,7 +48,7 @@
         </form>
 
     #{/if}
-    </div>
+    </form>
     </div>
 </div>
 

@@ -7,8 +7,10 @@ import play.data.validation.Error;
 import play.data.validation.Valid;
 import play.data.validation.Validation;
 import play.mvc.Controller;
+import scala.tools.nsc.doc.html.HtmlTags;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class StudentController extends Controller {
@@ -143,23 +145,11 @@ public class StudentController extends Controller {
 
             List<Subject> subjectsOfStudent = student.subjects;
             Logger.info("LIST OF SUBJECTS OF STUDENT: " + subjectsOfStudent);
+            List<Long> longs = new ArrayList<Long>(Arrays.asList(1L, 2L));
 
-            List<Subject> subjectsExcept = new ArrayList<Subject>();
-
-            for (Subject subject : subjects) {
-                boolean contains = false;
-
-                for (Subject subjectOfStudent : subjectsOfStudent) {
-                    if (subjectOfStudent.getId().equals(subject.getId())) {
-                        Logger.info("Found it: " + subject.getId());
-                        contains = true;
-                        break;
-                    }
-                }
-                if (!contains) {
-                    subjectsExcept.add(subject);
-                }
-            }
+            List subjectsExcept = Subject.em()
+                    .createQuery("SELECT s FROM Subject s  WHERE s NOT IN (SELECT s FROM Subject WHERE :student MEMBER OF s.students )")
+                    .setParameter("student", student).getResultList();
 
             Logger.info("LIST OF EXCEPTS: " + subjectsExcept);
 
